@@ -1,0 +1,169 @@
+
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  const navLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'Product', path: '/product' },
+    { name: 'Custom Bot', path: '/custom-bot' },
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <header
+        className={cn(
+          'fixed top-0 w-full z-50 transition-all duration-300 py-4',
+          isScrolled 
+            ? 'bg-black/50 backdrop-blur-xl border-b border-white/10 py-3' 
+            : 'bg-transparent'
+        )}
+      >
+        <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
+          <Link to="/" className="flex items-center space-x-2">
+            <span className="text-2xl font-bold text-gradient-blue">CCM</span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'text-sm font-medium transition-colors hover:text-primary',
+                  location.pathname === link.path
+                    ? 'text-primary'
+                    : 'text-muted-foreground'
+                )}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <a
+              href="#contact"
+              className="bg-primary hover:bg-primary/90 transition-colors text-white px-4 py-2 rounded-md text-sm font-medium"
+            >
+              Get Started
+            </a>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-white"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/10 animate-fade-in">
+            <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={cn(
+                    'text-sm font-medium py-2 transition-colors',
+                    location.pathname === link.path
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
+                  )}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <a
+                href="#contact"
+                className="bg-primary hover:bg-primary/90 transition-colors text-white px-4 py-2 rounded-md text-sm font-medium inline-block text-center"
+              >
+                Get Started
+              </a>
+            </div>
+          </div>
+        )}
+      </header>
+
+      <main className="flex-1 pt-16">{children}</main>
+
+      <footer className="bg-black/50 border-t border-white/10 py-12">
+        <div className="container max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="col-span-2 md:col-span-1">
+              <Link to="/" className="flex items-center space-x-2 mb-4">
+                <span className="text-2xl font-bold text-gradient-blue">CCM</span>
+              </Link>
+              <p className="text-muted-foreground text-sm">
+                AI-powered WhatsApp scheduling chatbot for barbershops and clinics.
+              </p>
+            </div>
+            
+            <div>
+              <h3 className="text-sm font-medium mb-4">Product</h3>
+              <ul className="space-y-2">
+                <li><Link to="/product" className="text-muted-foreground hover:text-primary text-sm">Features</Link></li>
+                <li><a href="#pricing" className="text-muted-foreground hover:text-primary text-sm">Pricing</a></li>
+                <li><a href="#faq" className="text-muted-foreground hover:text-primary text-sm">FAQ</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-sm font-medium mb-4">Solutions</h3>
+              <ul className="space-y-2">
+                <li><a href="#" className="text-muted-foreground hover:text-primary text-sm">Barbershops</a></li>
+                <li><a href="#" className="text-muted-foreground hover:text-primary text-sm">Clinics</a></li>
+                <li><Link to="/custom-bot" className="text-muted-foreground hover:text-primary text-sm">Custom Solutions</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-sm font-medium mb-4">Contact</h3>
+              <ul className="space-y-2">
+                <li><a href="#contact" className="text-muted-foreground hover:text-primary text-sm">Get Started</a></li>
+                <li><a href="mailto:info@ccm.com" className="text-muted-foreground hover:text-primary text-sm">Email Us</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-muted-foreground text-sm mb-4 md:mb-0">
+              © {new Date().getFullYear()} CCM. All rights reserved.
+            </p>
+            <div className="flex space-x-6">
+              <a href="#" className="text-muted-foreground hover:text-primary text-sm">Privacy</a>
+              <a href="#" className="text-muted-foreground hover:text-primary text-sm">Terms</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Layout;
