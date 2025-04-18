@@ -1,8 +1,23 @@
-
-import React from 'react';
-import Layout from '@/components/Layout';
-import { ArrowRight, Calendar, MessageSquare, Brain, Clock, BarChart, Settings, Users, Shield, Zap, CheckCircle, Smartphone, Globe } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import BenefitsSection from "@/components/BenefitsSection";
+import Layout from "@/components/Layout";
+import WhatsAppDemo from "@/components/WhatsAppDemo";
+import { cn } from "@/lib/utils";
+import {
+  ArrowRight,
+  BarChart,
+  Brain,
+  Calendar,
+  CheckCircle,
+  Clock,
+  Globe,
+  MessageSquare,
+  Settings,
+  Shield,
+  Smartphone,
+  Users,
+  Zap,
+} from "lucide-react";
+import React from "react";
 
 interface FeatureCardProps {
   title: string;
@@ -11,8 +26,18 @@ interface FeatureCardProps {
   className?: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ title, description, icon: Icon, className }) => (
-  <div className={cn("glass-card rounded-xl p-6 transition-all hover:translate-y-[-4px] hover:shadow-lg", className)}>
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  title,
+  description,
+  icon: Icon,
+  className,
+}) => (
+  <div
+    className={cn(
+      "glass-card rounded-xl p-6 transition-all hover:translate-y-[-4px] hover:shadow-lg",
+      className
+    )}
+  >
     <div className="bg-primary/20 w-12 h-12 rounded-lg flex items-center justify-center mb-5">
       <Icon size={24} className="text-primary" />
     </div>
@@ -28,7 +53,12 @@ interface TestimonialProps {
   company: string;
 }
 
-const Testimonial: React.FC<TestimonialProps> = ({ quote, author, position, company }) => (
+const Testimonial: React.FC<TestimonialProps> = ({
+  quote,
+  author,
+  position,
+  company,
+}) => (
   <div className="glass-card rounded-xl p-8">
     <div className="mb-6">
       <svg width="45" height="36" className="text-primary/60 mb-4">
@@ -45,7 +75,9 @@ const Testimonial: React.FC<TestimonialProps> = ({ quote, author, position, comp
         </div>
         <div>
           <p className="font-medium">{author}</p>
-          <p className="text-sm text-muted-foreground">{position}, {company}</p>
+          <p className="text-sm text-muted-foreground">
+            {position}, {company}
+          </p>
         </div>
       </div>
     </div>
@@ -55,133 +87,150 @@ const Testimonial: React.FC<TestimonialProps> = ({ quote, author, position, comp
 const ProductPage = () => {
   const features = [
     {
-      title: 'Smart Scheduling',
-      description: 'AI-powered assistant that understands natural language requests and manages your calendar intelligently.',
+      title: "Agendamento inteligente",
+      description:
+        "Assistente IA que compreende solicitações de linguagem natural e gerencia seu calendário de forma inteligente.",
       icon: Brain,
     },
     {
-      title: 'WhatsApp Integration',
-      description: 'Seamlessly connects with WhatsApp Business to handle appointments right where your customers are.',
+      title: "Integração com WhatsApp",
+      description:
+        "Conecta-se de forma suave com WhatsApp Business para gerenciar agendamentos onde seus clientes estão.",
       icon: MessageSquare,
     },
     {
-      title: 'Calendar Sync',
-      description: 'Automatically synchronizes with your existing calendar systems to prevent double bookings.',
+      title: "Sincronização com calendário",
+      description:
+        "Sincroniza automaticamente com seus sistemas de calendário existentes para evitar agendamentos duplicados.",
       icon: Calendar,
     },
     {
-      title: 'Automated Reminders',
-      description: 'Sends timely notifications to reduce no-shows and improve appointment attendance.',
+      title: "Lembretes automáticos",
+      description:
+        "Envia notificações pontuais para reduzir ausências e melhorar a presença.",
       icon: Clock,
     },
     {
-      title: 'Business Insights',
-      description: 'Comprehensive analytics dashboard providing valuable data on booking patterns and customer behavior.',
+      title: "Análise de negócios",
+      description:
+        "Painel de análise completo fornecendo dados valiosos sobre padrões de agendamento e comportamento do cliente.",
       icon: BarChart,
     },
     {
-      title: 'Custom Configuration',
-      description: 'Easily customize booking rules, service durations, buffer times, and operating hours.',
+      title: "Configuração personalizada",
+      description:
+        "Personalize regras de agendamento, durações de serviço, tempos de buffer e horários de funcionamento.",
       icon: Settings,
     },
     {
-      title: 'Team Management',
-      description: 'Manage multiple staff members, their schedules, and specialties all in one place.',
+      title: "Gerenciamento de equipe",
+      description:
+        "Gerencia vários membros da equipe, seus horários e especialidades em um único lugar.",
       icon: Users,
     },
     {
-      title: 'Secure Data',
-      description: 'Enterprise-grade security ensuring all customer data and conversations remain private and protected.',
+      title: "Segurança de dados",
+      description:
+        "Segurança de nível empresarial garantindo que todos os dados e conversas do cliente permaneçam privados e protegidos.",
       icon: Shield,
     },
     {
-      title: 'High Performance',
-      description: 'Lightning-fast responses with 99.9% uptime guarantee for uninterrupted service.',
+      title: "Desempenho",
+      description:
+        "Respostas rápidas com garantia de 99,9% de uptime para serviço contínuo.",
       icon: Zap,
     },
   ];
 
   const useCases = [
     {
-      title: 'Barbershops',
-      description: 'Streamline haircut appointments, reduce wait times, and improve client satisfaction.',
+      title: "Barbearias",
+      description:
+        "Agende cortes de cabelo, reduza tempos de espera e melhore a satisfação do cliente.",
       icon: Users,
     },
     {
-      title: 'Medical Clinics',
-      description: 'Manage patient appointments efficiently while maintaining privacy and sending important reminders.',
+      title: "Clínicas Médicas",
+      description:
+        "Gerencie agendamentos de pacientes de forma eficiente enquanto mantém a privacidade e envia lembretes importantes.",
       icon: CheckCircle,
     },
     {
-      title: 'Beauty Salons',
-      description: 'Handle different service types, durations, and specialized staff assignments automatically.',
+      title: "Salões de beleza",
+      description:
+        "Gerencie diferentes tipos de serviços, durações e atribuições de equipe especializadas automaticamente.",
       icon: Smartphone,
     },
     {
-      title: 'Professional Services',
-      description: 'Perfect for consultants, lawyers, and other professionals who work by appointment.',
+      title: "Serviços profissionais",
+      description:
+        "Perfeito para consultores, advogados e outros profissionais que trabalham por agendamento.",
       icon: Globe,
     },
   ];
 
   const pricingPlans = [
     {
-      name: 'Starter',
-      price: '$49',
-      period: '/month',
-      description: 'Perfect for small businesses just getting started with automated scheduling.',
+      name: "Starter",
+      price: "$49",
+      period: "/month",
+      description:
+        "Ideal para pequenas empresas que estão começando com agendamento automatizado.",
       features: [
-        'Up to 100 appointments/month',
-        'WhatsApp Business integration',
-        'Automated reminders',
-        'Google Calendar sync',
-        'Basic reporting',
-        'Email support'
-      ]
-    },
-    {
-      name: 'Professional',
-      price: '$99',
-      period: '/month',
-      description: 'For growing businesses that need more advanced scheduling capabilities.',
-      features: [
-        'Up to 500 appointments/month',
-        'All Starter features',
-        'Multiple staff management',
-        'Custom booking rules',
-        'Advanced analytics',
-        'Priority support'
+        "Até 100 agendamentos/mês",
+        "Integração com WhatsApp Business",
+        "Lembretes automatizados",
+        "Sincronização com Google Calendar",
+        "Relatórios básicos",
+        "Suporte por email",
       ],
-      highlighted: true
     },
     {
-      name: 'Enterprise',
-      price: 'Custom',
-      period: '',
-      description: 'For large organizations with complex scheduling needs and high volume.',
+      name: "Professional",
+      price: "$99",
+      period: "/month",
+      description:
+        "Para empresas em crescimento que precisam de capacidades de agendamento mais avançadas.",
       features: [
-        'Unlimited appointments',
-        'All Professional features',
-        'Custom integrations',
-        'Multiple location support',
-        'Dedicated account manager',
-        '24/7 premium support'
-      ]
-    }
+        "Até 500 agendamentos/mês",
+        "Todos os recursos Starter",
+        "Gerenciamento de várias equipes",
+        "Regras de agendamento personalizadas",
+        "Análise avançada",
+        "Suporte prioritário",
+      ],
+      highlighted: true,
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      period: "",
+      description:
+        "Para grandes organizações com necessidades complexas de agendamento e alto volume.",
+      features: [
+        "Agendamentos ilimitados",
+        "Todos os recursos Professional",
+        "Integrações personalizadas",
+        "Suporte dedicado",
+        "Suporte 24/7",
+      ],
+    },
   ];
 
   const testimonials = [
     {
-      quote: "Since implementing CCM's scheduling assistant, we've reduced our front desk workload by 70% and significantly improved customer satisfaction. The WhatsApp integration is seamless and our clients love how easy it is to book appointments.",
+      quote:
+        "Since implementing CCM's scheduling assistant, we've reduced our front desk workload by 70% and significantly improved customer satisfaction. The WhatsApp integration is seamless and our clients love how easy it is to book appointments.",
       author: "Michael Rodriguez",
       position: "Owner",
-      company: "Elite Cuts Barbershop"
+      company: "Elite Cuts Barbershop",
     },
     {
-      quote: "As a busy dermatology clinic, managing appointments efficiently is crucial. CCM's solution has not only streamlined our scheduling process but also reduced no-shows by 65% thanks to the automated reminders. It's been a game-changer for our practice.",
+      quote:
+        "As a busy dermatology clinic, managing appointments efficiently is crucial. CCM's solution has not only streamlined our scheduling process but also reduced no-shows by 65% thanks to the automated reminders. It's been a game-changer for our practice.",
       author: "Dr. Sarah Chen",
       position: "Medical Director",
-      company: "Glow Dermatology Clinic"
+      company: "Glow Dermatology Clinic",
     },
   ];
 
@@ -193,35 +242,40 @@ const ProductPage = () => {
         <div className="absolute inset-0 bg-grid-pattern bg-[length:30px_30px] opacity-20 pointer-events-none"></div>
         <div className="absolute inset-0 bg-hero-gradient opacity-80 pointer-events-none"></div>
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-glow transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-        
+
         {/* Content */}
         <div className="container max-w-7xl mx-auto px-6 py-24 md:py-32 relative z-10">
           <div className="max-w-3xl">
             <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4 animate-fade-in">
-              WhatsApp Scheduling Assistant
+              Assistente de agendamento de WhatsApp
             </div>
-            
+
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6 animate-fade-in">
-              Simplify Appointment Scheduling with <span className="text-gradient-blue">AI-Powered</span> Automation
+              Simplifique o agendamento de consultas com{" "}
+              <span className="text-gradient-blue">IA-Powered</span> Automação
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-8 animate-fade-in">
-              Our comprehensive scheduling solution helps businesses automate appointment booking and management through WhatsApp, saving time and improving customer experience.
+              Nossa solução de agendamento completa ajuda empresas a automatizar
+              o agendamento de consultas e gerenciar agendamentos através do
+              WhatsApp, economizando tempo e melhorando a experiência do
+              cliente.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 animate-fade-in">
-              <a 
-                href="#pricing" 
+              <a
+                href="#"
                 className="bg-primary hover:bg-primary/90 transition-all text-white px-6 py-3 rounded-md text-base font-medium inline-flex items-center justify-center"
+                onClick={(e) => e.preventDefault()}
               >
-                View Pricing
+                Ver demonstração
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
-              <a 
-                href="#use-cases" 
+              <a
+                href="#use-cases"
                 className="backdrop-blur-md bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white px-6 py-3 rounded-md text-base font-medium inline-flex items-center justify-center"
               >
-                Explore Use Cases
+                Explorar casos de uso
               </a>
             </div>
           </div>
@@ -232,11 +286,14 @@ const ProductPage = () => {
       <section id="features" className="section">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-            Features
+            Recursos
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Comprehensive Scheduling Features</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Recursos de agendamento completo
+          </h2>
           <p className="text-lg text-muted-foreground">
-            Everything you need to automate your appointment scheduling process from start to finish.
+            Tudo o que você precisa para automatizar seu processo de agendamento
+            desde o início até o fim.
           </p>
         </div>
 
@@ -257,23 +314,32 @@ const ProductPage = () => {
       <section id="use-cases" className="section bg-secondary/30">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-            Use Cases
+            Casos de uso
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Perfect For Many Industries</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Perfeito para muitas indústrias
+          </h2>
           <p className="text-lg text-muted-foreground">
-            Our scheduling assistant adapts to the unique needs of different businesses.
+            Nosso assistente de agendamento se adapta às necessidades únicas de
+            diferentes negócios.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {useCases.map((useCase, index) => (
-            <div key={index} className="glass-card rounded-xl p-8 animate-slide-in-bottom" style={{ animationDelay: `${index * 100}ms` }}>
+            <div
+              key={index}
+              className="glass-card rounded-xl p-8 animate-slide-in-bottom"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
               <div className="flex items-start">
                 <div className="bg-primary/20 w-12 h-12 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
                   <useCase.icon size={24} className="text-primary" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-2">{useCase.title}</h3>
+                  <h3 className="text-xl font-semibold mb-2">
+                    {useCase.title}
+                  </h3>
                   <p className="text-muted-foreground">{useCase.description}</p>
                 </div>
               </div>
@@ -282,80 +348,33 @@ const ProductPage = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section id="pricing" className="section">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-            Pricing
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-          <p className="text-lg text-muted-foreground">
-            Choose the plan that's right for your business. All plans include a 14-day free trial.
-          </p>
-        </div>
+      <div id="demo">
+        <WhatsAppDemo />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {pricingPlans.map((plan, index) => (
-            <div 
-              key={index} 
-              className={cn(
-                "glass-card rounded-xl p-8 flex flex-col h-full transition-all hover:translate-y-[-4px]",
-                plan.highlighted ? "ring-2 ring-primary" : ""
-              )}
-            >
-              {plan.highlighted && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white text-sm font-medium py-1 px-3 rounded-full">
-                  Most Popular
-                </div>
-              )}
-              <div className="mb-6">
-                <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-                <div className="flex items-end mb-2">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className="text-muted-foreground ml-1">{plan.period}</span>
-                </div>
-                <p className="text-muted-foreground">{plan.description}</p>
-              </div>
-              <ul className="space-y-3 mb-8 flex-grow">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-start">
-                    <CheckCircle size={18} className="text-primary mr-2 mt-0.5 flex-shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <a 
-                href="#contact" 
-                className={cn(
-                  "transition-all text-white px-6 py-3 rounded-md text-base font-medium inline-flex items-center justify-center w-full",
-                  plan.highlighted
-                    ? "bg-primary hover:bg-primary/90"
-                    : "backdrop-blur-md bg-white/5 hover:bg-white/10 border border-white/10"
-                )}
-              >
-                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Start Free Trial'}
-              </a>
-            </div>
-          ))}
-        </div>
-      </section>
+      <BenefitsSection />
 
       {/* Technical Specs */}
       <section id="tech-specs" className="section bg-secondary/30">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-            Technical Specifications
+            Especificações técnicas
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for Performance & Reliability</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Construído para desempenho e confiabilidade
+          </h2>
           <p className="text-lg text-muted-foreground">
-            Our platform is engineered with enterprise-grade technology to ensure smooth operation.
+            Nossa plataforma é projetada com tecnologia de nível empresarial
+            para ensure smooth operation.
           </p>
         </div>
 
         <div className="glass-card rounded-xl p-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
             <div>
-              <h3 className="text-xl font-semibold mb-4">Integration Capabilities</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                Capacidade de integração
+              </h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
@@ -363,78 +382,82 @@ const ProductPage = () => {
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Google Calendar, iCloud, Outlook</span>
+                  <span>Dashboard de gerenciamento</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Zapier for 3000+ app connections</span>
+                  <span>Aplicativo personalizado para sua marca</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>REST API for custom integrations</span>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-4">Security & Compliance</h3>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>End-to-end encryption</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>GDPR compliant data handling</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>SOC 2 Type II certified</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Regular security audits</span>
+                  <span>API REST para integrações personalizadas</span>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-4">Performance</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                Segurança e conformidade
+              </h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>99.9% uptime guarantee</span>
+                  <span>Criptografia de ponta a ponta</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Response time under 1 second</span>
+                  <span>Tratamento de dados</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Globally distributed infrastructure</span>
+                  <span>Certificado de aprovação</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Automatic scaling during peak times</span>
+                  <span>Auditorias de segurança regulares</span>
                 </li>
               </ul>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-4">Implementation</h3>
+              <h3 className="text-xl font-semibold mb-4">Desempenho</h3>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Quick setup (under 10 minutes)</span>
+                  <span>Garantia de uptime de 99,9%</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Guided onboarding process</span>
+                  <span>Tempo de resposta entre 20 e 40 segundos</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Comprehensive documentation</span>
+                  <span>Infraestrutura distribuída globalmente</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
-                  <span>Free setup assistance</span>
+                  <span>
+                    Escalabilidade automática durante picos de demanda
+                  </span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Implementação</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
+                  <span>Configuração rápida (em menos de 1 hora)</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
+                  <span>Processo de onboarding guiado</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
+                  <span>Validamos a configuração da dashboard</span>
+                </li>
+                <li className="flex items-start">
+                  <CheckCircle size={18} className="text-primary mr-2 mt-0.5" />
+                  <span>Assistência de configuração gratuita</span>
                 </li>
               </ul>
             </div>
@@ -446,11 +469,14 @@ const ProductPage = () => {
       <section id="testimonials" className="section">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-            Success Stories
+            Histórias de sucesso
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            O que nossos clientes dizem
+          </h2>
           <p className="text-lg text-muted-foreground">
-            Businesses across industries are transforming their scheduling with our solution.
+            Empresas em várias indústrias estão transformando seu agendamento
+            com nossa solução.
           </p>
         </div>
 
@@ -472,33 +498,32 @@ const ProductPage = () => {
         <div className="glass-card rounded-xl p-8 md:p-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div>
-              <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Scheduling?</h2>
+              <h2 className="text-3xl font-bold mb-4">
+                Pronto para transformar seu agendamento?
+              </h2>
               <p className="text-muted-foreground mb-6">
-                Join hundreds of businesses that have revolutionized their appointment booking process with our WhatsApp AI assistant.
+                Junte-se a empresas que revolucionaram seu processo de
+                agendamento com nosso assistente de agendamento do WhatsApp IA.
               </p>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-center">
                   <CheckCircle size={18} className="text-primary mr-2" />
-                  <span>Free 14-day trial</span>
+                  <span>Implementação completa</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle size={18} className="text-primary mr-2" />
-                  <span>No credit card required</span>
+                  <span>Acesso total a todos os recursos</span>
                 </li>
                 <li className="flex items-center">
                   <CheckCircle size={18} className="text-primary mr-2" />
-                  <span>Full access to all features</span>
-                </li>
-                <li className="flex items-center">
-                  <CheckCircle size={18} className="text-primary mr-2" />
-                  <span>Dedicated support during setup</span>
+                  <span>Suporte dedicado durante a configuração</span>
                 </li>
               </ul>
-              <a 
-                href="#" 
+              <a
+                href="#"
                 className="bg-primary hover:bg-primary/90 transition-all text-white px-6 py-3 rounded-md text-base font-medium inline-flex items-center justify-center"
               >
-                Start Your Free Trial
+                Comece sua implementação
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </div>
@@ -507,46 +532,66 @@ const ProductPage = () => {
               <div className="relative p-6">
                 <form className="space-y-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-1">Full Name</label>
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium mb-1"
+                    >
+                      Nome completo
+                    </label>
                     <input
                       type="text"
                       id="name"
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="Enter your name"
+                      placeholder="Digite seu nome"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-1">Email Address</label>
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium mb-1"
+                    >
+                      Endereço de email
+                    </label>
                     <input
                       type="email"
                       id="email"
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="Enter your email"
+                      placeholder="Digite seu email"
                     />
                   </div>
                   <div>
-                    <label htmlFor="company" className="block text-sm font-medium mb-1">Company Name</label>
+                    <label
+                      htmlFor="company"
+                      className="block text-sm font-medium mb-1"
+                    >
+                      Nome da empresa
+                    </label>
                     <input
                       type="text"
                       id="company"
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="Enter your company name"
+                      placeholder="Digite o nome da sua empresa"
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-1">Message (Optional)</label>
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium mb-1"
+                    >
+                      Mensagem (Opcional)
+                    </label>
                     <textarea
                       id="message"
                       rows={4}
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                      placeholder="Tell us about your scheduling needs"
+                      placeholder="Nos conte sobre suas necessidades de agendamento"
                     ></textarea>
                   </div>
                   <button
                     type="submit"
                     className="w-full bg-primary hover:bg-primary/90 transition-all text-white px-6 py-3 rounded-md text-base font-medium"
                   >
-                    Request Demo
+                    Solicite uma demonstração
                   </button>
                 </form>
               </div>

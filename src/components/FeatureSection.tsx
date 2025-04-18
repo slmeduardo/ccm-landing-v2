@@ -1,7 +1,13 @@
-
-import React from 'react';
-import { Calendar, MessageSquare, Brain, Clock, BarChart, Settings } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
+import {
+  BarChart,
+  Brain,
+  Calendar,
+  Clock,
+  MessageSquare,
+  Settings,
+} from "lucide-react";
+import React from "react";
 
 interface FeatureCardProps {
   title: string;
@@ -11,14 +17,14 @@ interface FeatureCardProps {
   delay?: number;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = ({ 
-  title, 
-  description, 
+const FeatureCard: React.FC<FeatureCardProps> = ({
+  title,
+  description,
   icon: Icon,
   className,
-  delay = 0 
+  delay = 0,
 }) => (
-  <div 
+  <div
     className={cn(
       "glass-card rounded-xl p-6 transition-all hover:translate-y-[-4px] hover:shadow-lg",
       className
@@ -36,33 +42,39 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 const FeatureSection = () => {
   const features = [
     {
-      title: 'Automated Scheduling',
-      description: 'Let customers book appointments directly through WhatsApp without human intervention.',
+      title: "Agendamento Automatizado",
+      description:
+        "Permite que os clientes agendem consultas diretamente pelo WhatsApp sem a necessidade de intervenção humana.",
       icon: Calendar,
     },
     {
-      title: 'Natural Conversations',
-      description: 'AI-powered chat that feels natural and understands customer requests intelligently.',
+      title: "Conversas Inteligentes",
+      description:
+        "Chat com IA que se comporta de forma natural e compreende as solicitações do cliente de forma inteligente.",
       icon: MessageSquare,
     },
     {
-      title: 'Smart Recommendations',
-      description: 'Suggests optimal time slots based on business availability and customer preferences.',
+      title: "Recomendações Inteligentes",
+      description:
+        "Sugestões de horários ideais com base na disponibilidade do negócio e preferências do cliente.",
       icon: Brain,
     },
     {
-      title: 'Automated Reminders',
-      description: 'Sends timely appointment reminders to reduce no-shows and improve attendance.',
+      title: "Lembretes Automáticos",
+      description:
+        "Envia lembretes de consultas pontuais para reduzir ausências e melhorar a presença.",
       icon: Clock,
     },
     {
-      title: 'Business Analytics',
-      description: 'Get insights into booking patterns, popular services, and customer behavior.',
+      title: "Análise de Negócios",
+      description:
+        "Obtenha insights sobre padrões de agendamento, serviços populares e comportamento do cliente.",
       icon: BarChart,
     },
     {
-      title: 'Easy Integration',
-      description: 'Seamlessly connects with your existing calendar and business management systems.',
+      title: "Integração Simples",
+      description:
+        "Conecta-se de forma suave com seus sistemas de calendário e gerenciamento de negócios existentes.",
       icon: Settings,
     },
   ];
@@ -71,11 +83,14 @@ const FeatureSection = () => {
     <section id="features" className="section">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-          Features
+          Recursos
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Smart Scheduling Made Simple</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Agendamento Automatizado
+        </h2>
         <p className="text-lg text-muted-foreground">
-          Everything you need to automate appointments and deliver a seamless customer experience.
+          Tudo o que você precisa para automatizar agendamentos e fornecer uma
+          experiência de cliente sem falhas.
         </p>
       </div>
 

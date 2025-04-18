@@ -1,8 +1,7 @@
-
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,8 +17,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -27,24 +26,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Product', path: '/product' },
-    { name: 'Custom Bot', path: '/custom-bot' },
+    { name: "Home", path: "/" },
+    { name: "Assistente", path: "/product" },
+    { name: "Soluções personalizadas", path: "/custom-bot" },
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <header
         className={cn(
-          'fixed top-0 w-full z-50 transition-all duration-300 py-4',
-          isScrolled 
-            ? 'bg-black/50 backdrop-blur-xl border-b border-white/10 py-3' 
-            : 'bg-transparent'
+          "fixed top-0 w-full z-50 transition-all duration-300 py-4",
+          isScrolled
+            ? "bg-black/50 backdrop-blur-xl border-b border-white/10 py-3"
+            : "bg-transparent"
         )}
       >
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-gradient-blue">CCM</span>
+            <img src="/images/logo.svg" alt="CCM" className="h-8" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -54,10 +53,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 key={link.path}
                 to={link.path}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-primary',
+                  "text-sm font-medium transition-colors hover:text-primary",
                   location.pathname === link.path
-                    ? 'text-primary'
-                    : 'text-muted-foreground'
+                    ? "text-primary"
+                    : "text-muted-foreground"
                 )}
               >
                 {link.name}
@@ -90,10 +89,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    'text-sm font-medium py-2 transition-colors',
+                    "text-sm font-medium py-2 transition-colors",
                     location.pathname === link.path
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? "text-primary"
+                      : "text-muted-foreground hover:text-primary"
                   )}
                 >
                   {link.name}
@@ -117,47 +116,114 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="col-span-2 md:col-span-1">
               <Link to="/" className="flex items-center space-x-2 mb-4">
-                <span className="text-2xl font-bold text-gradient-blue">CCM</span>
+                <img src="/images/logo.svg" alt="CCM" className="h-8" />
               </Link>
               <p className="text-muted-foreground text-sm">
-                AI-powered WhatsApp scheduling chatbot for barbershops and clinics.
+                Chatbot de agendamento de WhatsApp com IA para barbearias e
+                clínicas.
               </p>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-medium mb-4">Product</h3>
+              <h3 className="text-sm font-medium mb-4">Produto</h3>
               <ul className="space-y-2">
-                <li><Link to="/product" className="text-muted-foreground hover:text-primary text-sm">Features</Link></li>
-                <li><a href="#pricing" className="text-muted-foreground hover:text-primary text-sm">Pricing</a></li>
-                <li><a href="#faq" className="text-muted-foreground hover:text-primary text-sm">FAQ</a></li>
+                <li>
+                  <Link
+                    to="/product"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Recursos
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href="#pricing"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Preços
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#faq"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Perguntas frequentes
+                  </a>
+                </li>
               </ul>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-medium mb-4">Solutions</h3>
+              <h3 className="text-sm font-medium mb-4">Soluções</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-muted-foreground hover:text-primary text-sm">Barbershops</a></li>
-                <li><a href="#" className="text-muted-foreground hover:text-primary text-sm">Clinics</a></li>
-                <li><Link to="/custom-bot" className="text-muted-foreground hover:text-primary text-sm">Custom Solutions</Link></li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Barbearias
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Clínicas
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    to="/custom-bot"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Soluções personalizadas
+                  </Link>
+                </li>
               </ul>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-medium mb-4">Contact</h3>
+              <h3 className="text-sm font-medium mb-4">Contato</h3>
               <ul className="space-y-2">
-                <li><a href="#contact" className="text-muted-foreground hover:text-primary text-sm">Get Started</a></li>
-                <li><a href="mailto:info@ccm.com" className="text-muted-foreground hover:text-primary text-sm">Email Us</a></li>
+                <li>
+                  <a
+                    href="#contact"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Comece agora
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="mailto:info@ccm.com"
+                    className="text-muted-foreground hover:text-primary text-sm"
+                  >
+                    Email-nos
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} CCM. All rights reserved.
+              © {new Date().getFullYear()} CCM. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6">
-              <a href="#" className="text-muted-foreground hover:text-primary text-sm">Privacy</a>
-              <a href="#" className="text-muted-foreground hover:text-primary text-sm">Terms</a>
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-primary text-sm"
+              >
+                Política de privacidade
+              </a>
+              <a
+                href="#"
+                className="text-muted-foreground hover:text-primary text-sm"
+              >
+                Termos de uso
+              </a>
             </div>
           </div>
         </div>
