@@ -1,5 +1,3 @@
-
-import React from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -10,28 +8,35 @@ import {
 const FaqSection = () => {
   const faqs = [
     {
-      question: "How does the WhatsApp scheduling chatbot work?",
-      answer: "Our AI-powered chatbot integrates directly with WhatsApp. Customers can send messages to your WhatsApp business number, and our AI assistant handles the entire scheduling process - from checking availability to sending confirmations and reminders. All conversations happen naturally, as if they were chatting with a human assistant."
+      question: "Como funciona o chatbot de agendamento do WhatsApp?",
+      answer:
+        "Nosso chatbot com inteligência artificial se integra diretamente ao WhatsApp. Os clientes podem enviar mensagens para o seu número de WhatsApp Business, e nosso assistente de IA gerencia todo o processo de agendamento - desde verificar disponibilidade até enviar confirmações e lembretes. Todas as conversas acontecem naturalmente, como se estivessem conversando com um assistente humano.",
     },
     {
-      question: "Do I need technical knowledge to set it up?",
-      answer: "Not at all. Our setup process is designed to be extremely user-friendly. We'll guide you through connecting your WhatsApp Business number, importing your service information, and setting your availability preferences. The entire process typically takes less than 10 minutes to complete."
+      question: "Preciso de conhecimento técnico para configurá-lo?",
+      answer:
+        "De forma alguma. Nosso processo de configuração foi projetado para ser extremamente amigável. Vamos guiá-lo através da conexão do seu número do WhatsApp Business, importação das informações de serviço e definição das suas preferências de disponibilidade. O processo completo geralmente leva menos de 10 minutos para ser concluído.",
     },
     {
-      question: "Can it integrate with my existing scheduling system?",
-      answer: "Yes! Our solution integrates with popular scheduling and calendar systems like Google Calendar, Microsoft Outlook, Calendly, Acuity, and more. During setup, you'll be able to connect your existing tools, ensuring all appointments stay synchronized across platforms."
+      question:
+        "Ele pode se integrar com meu sistema de agendamento existente?",
+      answer:
+        "Sim! Nossa solução se integra com sistemas populares de agendamento e calendário como Google Calendar, Microsoft Outlook, Calendly, Acuity e outros. Durante a configuração, você poderá conectar suas ferramentas existentes, garantindo que todos os compromissos permaneçam sincronizados entre as plataformas.",
     },
     {
-      question: "What languages does the chatbot support?",
-      answer: "Currently, our chatbot supports English, Spanish, Portuguese, French, and German. We're continuously adding support for more languages. If you need a specific language that's not currently supported, please contact us to discuss your requirements."
+      question: "Quais idiomas o chatbot suporta?",
+      answer:
+        "Atualmente, nosso chatbot suporta inglês, espanhol, português, francês e alemão. Estamos continuamente adicionando suporte para mais idiomas. Se você precisar de um idioma específico que não é suportado atualmente, entre em contato conosco para discutir suas necessidades.",
     },
     {
-      question: "How does pricing work?",
-      answer: "We offer several flexible pricing tiers based on your business size and volume of appointments. All plans include our core features, with higher tiers offering more advanced capabilities like custom integrations and analytics. We also offer a 14-day free trial so you can experience the full benefits before committing."
+      question: "Como funciona o preço?",
+      answer:
+        "Oferecemos vários níveis de preços flexíveis com base no tamanho do seu negócio e volume de agendamentos. Todos os planos incluem nossos recursos principais, com níveis mais altos oferecendo recursos mais avançados como integrações personalizadas e análises. Também oferecemos um período de teste gratuito de 14 dias para que você possa experimentar todos os benefícios antes de se comprometer.",
     },
     {
-      question: "Can I customize the chatbot's responses?",
-      answer: "Absolutely! You can customize the chatbot's personality, greeting messages, confirmation texts, and more. For businesses with specific needs, our Custom Bot service allows for even deeper customization of the conversation flow and integration capabilities."
+      question: "Posso personalizar as respostas do chatbot?",
+      answer:
+        "Absolutamente! Você pode personalizar a personalidade do chatbot, mensagens de saudação, textos de confirmação e muito mais. Para empresas com necessidades específicas, nosso serviço de Bot Personalizado permite uma personalização ainda mais profunda do fluxo de conversa e recursos de integração.",
     },
   ];
 
@@ -39,16 +44,23 @@ const FaqSection = () => {
     <section id="faq" className="section">
       <div className="text-center max-w-3xl mx-auto mb-16">
         <div className="inline-block backdrop-blur-md bg-primary/10 border border-primary/20 rounded-full px-4 py-1.5 text-sm font-medium text-primary mb-4">
-          FAQ
+          Perguntas Frequentes
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Perguntas Frequentes
+        </h2>
         <p className="text-lg text-muted-foreground">
-          Everything you need to know about our WhatsApp scheduling assistant.
+          Tudo o que você precisa saber sobre nosso assistente de agendamento do
+          WhatsApp.
         </p>
       </div>
 
       <div className="max-w-3xl mx-auto glass-card rounded-xl p-6">
-        <Accordion type="single" collapsible className="divide-y divide-white/10">
+        <Accordion
+          type="single"
+          collapsible
+          className="divide-y divide-white/10"
+        >
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={`item-${index}`}>
               <AccordionTrigger className="text-left py-5 text-lg font-medium">
@@ -64,13 +76,13 @@ const FaqSection = () => {
 
       <div className="text-center mt-12">
         <p className="text-muted-foreground mb-4">
-          Still have questions? We're here to help.
+          Ainda tem dúvidas? Estamos aqui para ajudar.
         </p>
-        <a 
-          href="#contact" 
+        <a
+          href="#contact"
           className="backdrop-blur-md bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white px-6 py-3 rounded-md text-base font-medium inline-flex items-center justify-center"
         >
-          Contact Us
+          Entre em Contato
         </a>
       </div>
     </section>
