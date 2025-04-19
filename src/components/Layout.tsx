@@ -23,7 +23,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    // Rola para o topo quando o usuário muda de aba (troca de página)
+    window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute("href");
+    // Não rola para o topo se for o botão "Get Started" (link com #contact)
+    if (href === "#contact") {
+      return;
+    }
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -42,7 +52,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         )}
       >
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
-          <Link to="/" className="flex items-center space-x-2">
+          <Link
+            to="/"
+            className="flex items-center space-x-2"
+            onClick={handleNavLinkClick}
+          >
             <img src="/images/logo.svg" alt="CCM" className="h-8" />
           </Link>
 
@@ -52,6 +66,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Link
                 key={link.path}
                 to={link.path}
+                onClick={handleNavLinkClick}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
                   location.pathname === link.path
@@ -66,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               href="#contact"
               className="bg-primary hover:bg-primary/90 transition-colors text-white px-4 py-2 rounded-md text-sm font-medium"
             >
-              Get Started
+              Começar agora
             </a>
           </nav>
 
@@ -88,6 +103,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link
                   key={link.path}
                   to={link.path}
+                  onClick={handleNavLinkClick}
                   className={cn(
                     "text-sm font-medium py-2 transition-colors",
                     location.pathname === link.path
@@ -102,7 +118,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 href="#contact"
                 className="bg-primary hover:bg-primary/90 transition-colors text-white px-4 py-2 rounded-md text-sm font-medium inline-block text-center"
               >
-                Get Started
+                Começar agora
               </a>
             </div>
           </div>
@@ -115,7 +131,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="container max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="col-span-2 md:col-span-1">
-              <Link to="/" className="flex items-center space-x-2 mb-4">
+              <Link
+                to="/"
+                className="flex items-center space-x-2 mb-4"
+                onClick={handleNavLinkClick}
+              >
                 <img src="/images/logo.svg" alt="CCM" className="h-8" />
               </Link>
               <p className="text-muted-foreground text-sm">
@@ -130,6 +150,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <li>
                   <Link
                     to="/product"
+                    onClick={handleNavLinkClick}
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
                     Recursos
@@ -176,6 +197,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <li>
                   <Link
                     to="/custom-bot"
+                    onClick={handleNavLinkClick}
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
                     Soluções personalizadas
