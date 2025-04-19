@@ -1,7 +1,7 @@
 import BenefitsSection from "@/components/BenefitsSection";
 import Layout from "@/components/Layout";
-import WhatsAppDemo from "@/components/WhatsAppDemo";
 import { cn } from "@/lib/utils";
+import emailjs from "@emailjs/browser";
 import {
   ArrowRight,
   BarChart,
@@ -17,7 +17,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 interface FeatureCardProps {
   title: string;
@@ -234,6 +234,67 @@ const ProductPage = () => {
     },
   ];
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    contact: "",
+    message: "",
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState({
+    success: false,
+    message: "",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    emailjs
+      .send(
+        "service_73hrjon",
+        "template_s55mjkv",
+        {
+          name: formData.name,
+          time: new Date().toLocaleString(),
+          message: `
+            Email: ${formData.email}
+            Contato: ${formData.contact}
+            Mensagem: ${formData.message}
+        `,
+        },
+        "shas1t9WT9WETAZdN"
+      )
+      .then((result) => {
+        setSubmitting(false);
+        setSubmitResult({
+          success: true,
+          message:
+            "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+        });
+        setFormData({ name: "", email: "", contact: "", message: "" });
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        setSubmitResult({
+          success: false,
+          message: "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
+        });
+        console.error("Erro ao enviar email:", error);
+      });
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -347,10 +408,6 @@ const ProductPage = () => {
           ))}
         </div>
       </section>
-
-      <div id="demo">
-        <WhatsAppDemo />
-      </div>
 
       <BenefitsSection />
 
@@ -530,7 +587,18 @@ const ProductPage = () => {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg"></div>
               <div className="relative p-6">
-                <form className="space-y-4">
+                {submitResult.message && (
+                  <div
+                    className={`mb-4 p-3 rounded-md ${
+                      submitResult.success
+                        ? "bg-green-500/20 text-green-400"
+                        : "bg-red-500/20 text-red-400"
+                    }`}
+                  >
+                    {submitResult.message}
+                  </div>
+                )}
+                <form className="space-y-4" onSubmit={handleFormSubmit}>
                   <div>
                     <label
                       htmlFor="name"
@@ -541,8 +609,11 @@ const ProductPage = () => {
                     <input
                       type="text"
                       id="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="Digite seu nome"
+                      required
                     />
                   </div>
                   <div>
@@ -555,22 +626,28 @@ const ProductPage = () => {
                     <input
                       type="email"
                       id="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="Digite seu email"
+                      required
                     />
                   </div>
                   <div>
                     <label
-                      htmlFor="company"
+                      htmlFor="contact"
                       className="block text-sm font-medium mb-1"
                     >
                       Número de contato
                     </label>
                     <input
                       type="text"
-                      id="company"
+                      id="contact"
+                      value={formData.contact}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="Digite o número de contato"
+                      required
                     />
                   </div>
                   <div>
@@ -583,15 +660,44 @@ const ProductPage = () => {
                     <textarea
                       id="message"
                       rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
                       className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                       placeholder="Nos conte sobre suas necessidades de agendamento"
                     ></textarea>
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 transition-all text-white px-6 py-3 rounded-md text-base font-medium"
+                    disabled={submitting}
+                    className="w-full bg-primary hover:bg-primary/90 transition-all text-white px-6 py-3 rounded-md text-base font-medium flex justify-center items-center"
                   >
-                    Solicite uma demonstração
+                    {submitting ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        Enviando...
+                      </>
+                    ) : (
+                      "Solicite uma demonstração"
+                    )}
                   </button>
                 </form>
               </div>

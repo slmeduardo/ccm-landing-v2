@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { cn } from "@/lib/utils";
+import emailjs from "@emailjs/browser";
 import {
   ArrowRight,
   BarChart,
@@ -16,7 +17,7 @@ import {
   Stethoscope,
   Zap,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 interface CaseStudyProps {
   title: string;
@@ -157,6 +158,90 @@ const CustomBot = () => {
       ],
     },
   ];
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    industry: "",
+    projectDetails: "",
+    marketing: false,
+  });
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState({
+    success: false,
+    message: "",
+  });
+
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: value,
+    }));
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      marketing: e.target.checked,
+    }));
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitting(true);
+
+    emailjs
+      .send(
+        "service_73hrjon",
+        "template_8ji0c3s",
+        {
+          name: formData.name,
+          time: new Date().toLocaleString(),
+          message: `
+            Email: ${formData.email}
+            Empresa: ${formData.company}
+            Telefone: ${formData.phone}
+            Setor: ${formData.industry}
+            Detalhes do projeto: ${formData.projectDetails}
+            Aceitou marketing: ${formData.marketing ? "Sim" : "Não"}
+        `,
+        },
+        "shas1t9WT9WETAZdN"
+      )
+      .then((result) => {
+        setSubmitting(false);
+        setSubmitResult({
+          success: true,
+          message:
+            "Mensagem enviada com sucesso! Entraremos em contato em breve.",
+        });
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          phone: "",
+          industry: "",
+          projectDetails: "",
+          marketing: false,
+        });
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        setSubmitResult({
+          success: false,
+          message: "Ocorreu um erro ao enviar sua mensagem. Tente novamente.",
+        });
+        console.error("Erro ao enviar email:", error);
+      });
+  };
 
   return (
     <Layout>
@@ -570,7 +655,18 @@ const CustomBot = () => {
         </div>
 
         <div className="glass-card rounded-xl p-8 md:p-12 max-w-4xl mx-auto">
-          <form className="space-y-6">
+          {submitResult.message && (
+            <div
+              className={`mb-4 p-3 rounded-md ${
+                submitResult.success
+                  ? "bg-green-500/20 text-green-400"
+                  : "bg-red-500/20 text-red-400"
+              }`}
+            >
+              {submitResult.message}
+            </div>
+          )}
+          <form className="space-y-6" onSubmit={handleFormSubmit}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label
@@ -582,8 +678,11 @@ const CustomBot = () => {
                 <input
                   type="text"
                   id="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Digite seu nome"
+                  required
                 />
               </div>
 
@@ -597,8 +696,11 @@ const CustomBot = () => {
                 <input
                   type="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Digite seu email"
+                  required
                 />
               </div>
 
@@ -607,13 +709,16 @@ const CustomBot = () => {
                   htmlFor="company"
                   className="block text-sm font-medium mb-1"
                 >
-                  Número de contato
+                  Nome da empresa
                 </label>
                 <input
                   type="text"
                   id="company"
+                  value={formData.company}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Digite o número de contato"
+                  placeholder="Digite o nome da empresa"
+                  required
                 />
               </div>
 
@@ -627,8 +732,11 @@ const CustomBot = () => {
                 <input
                   type="tel"
                   id="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
                   className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                   placeholder="Digite seu número de telefone"
+                  required
                 />
               </div>
             </div>
@@ -642,7 +750,10 @@ const CustomBot = () => {
               </label>
               <select
                 id="industry"
+                value={formData.industry}
+                onChange={handleInputChange}
                 className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                required
               >
                 <option value="">Selecione seu setor</option>
                 <option value="healthcare">Saúde</option>
@@ -656,22 +767,30 @@ const CustomBot = () => {
 
             <div>
               <label
-                htmlFor="project-details"
+                htmlFor="projectDetails"
                 className="block text-sm font-medium mb-1"
               >
                 Detalhes do projeto
               </label>
               <textarea
-                id="project-details"
+                id="projectDetails"
                 rows={6}
+                value={formData.projectDetails}
+                onChange={handleInputChange}
                 className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
                 placeholder="Descreva seu projeto, desafios e objetivos"
+                required
               ></textarea>
             </div>
 
             <div>
               <label className="flex items-start">
-                <input type="checkbox" className="mt-1 mr-2" />
+                <input
+                  type="checkbox"
+                  className="mt-1 mr-2"
+                  checked={formData.marketing}
+                  onChange={handleCheckboxChange}
+                />
                 <span className="text-sm text-muted-foreground">
                   Eu concordo em receber comunicações sobre minha solicitação e
                   outros materiais de marketing relevantes.
@@ -682,10 +801,39 @@ const CustomBot = () => {
             <div className="text-center">
               <button
                 type="submit"
+                disabled={submitting}
                 className="bg-primary hover:bg-primary/90 transition-all text-white px-8 py-3 rounded-md text-base font-medium inline-flex items-center justify-center"
               >
-                Enviar solicitação
-                <ArrowRight className="ml-2 h-4 w-4" />
+                {submitting ? (
+                  <>
+                    <svg
+                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      ></path>
+                    </svg>
+                    Enviando...
+                  </>
+                ) : (
+                  <>
+                    Enviar solicitação
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </>
+                )}
               </button>
             </div>
           </form>
