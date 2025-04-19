@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -11,6 +12,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const isEnglish = location.pathname.startsWith("/en");
+  const languagePrefix = isEnglish ? "/en" : "/pt";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,11 +38,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     }
   };
 
+  // Define os links de navegação baseados no idioma atual
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Assistente", path: "/product" },
-    { name: "Soluções personalizadas", path: "/custom-bot" },
+    {
+      name: isEnglish ? "Home" : "Home",
+      path: `${languagePrefix}`,
+    },
+    {
+      name: isEnglish ? "Assistant" : "Assistente",
+      path: `${languagePrefix}/product`,
+    },
+    {
+      name: isEnglish ? "Custom Solutions" : "Soluções personalizadas",
+      path: `${languagePrefix}/custom-bot`,
+    },
   ];
+
+  // Texto do botão de contato baseado no idioma
+  const contactButtonText = isEnglish ? "Get Started" : "Começar agora";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -53,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
           <Link
-            to="/"
+            to={languagePrefix}
             className="flex items-center space-x-2"
             onClick={handleNavLinkClick}
           >
@@ -81,8 +97,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               href="#contact"
               className="bg-primary hover:bg-primary/90 transition-colors text-white px-4 py-2 rounded-md text-sm font-medium"
             >
-              Começar agora
+              {contactButtonText}
             </a>
+            <LanguageSwitcher />
           </nav>
 
           {/* Mobile Menu Button */}
@@ -118,8 +135,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 href="#contact"
                 className="bg-primary hover:bg-primary/90 transition-colors text-white px-4 py-2 rounded-md text-sm font-medium inline-block text-center"
               >
-                Começar agora
+                {contactButtonText}
               </a>
+              <div className="py-2">
+                <LanguageSwitcher />
+              </div>
             </div>
           </div>
         )}
@@ -132,28 +152,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="col-span-2 md:col-span-1">
               <Link
-                to="/"
+                to={languagePrefix}
                 className="flex items-center space-x-2 mb-4"
                 onClick={handleNavLinkClick}
               >
                 <img src="/images/logo.svg" alt="CCM" className="h-8" />
               </Link>
               <p className="text-muted-foreground text-sm">
-                Chatbot de agendamento de WhatsApp com IA para barbearias e
-                clínicas.
+                {isEnglish
+                  ? "WhatsApp scheduling chatbot with AI for barbershops and clinics."
+                  : "Chatbot de agendamento de WhatsApp com IA para barbearias e clínicas."}
               </p>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium mb-4">Produto</h3>
+              <h3 className="text-sm font-medium mb-4">
+                {isEnglish ? "Product" : "Produto"}
+              </h3>
               <ul className="space-y-2">
                 <li>
                   <Link
-                    to="/product"
+                    to={`${languagePrefix}/product`}
                     onClick={handleNavLinkClick}
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Recursos
+                    {isEnglish ? "Features" : "Recursos"}
                   </Link>
                 </li>
                 <li>
@@ -161,7 +184,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     href="#pricing"
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Preços
+                    {isEnglish ? "Pricing" : "Preços"}
                   </a>
                 </li>
                 <li>
@@ -169,21 +192,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     href="#faq"
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Perguntas frequentes
+                    {isEnglish ? "FAQ" : "Perguntas frequentes"}
                   </a>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium mb-4">Soluções</h3>
+              <h3 className="text-sm font-medium mb-4">
+                {isEnglish ? "Solutions" : "Soluções"}
+              </h3>
               <ul className="space-y-2">
                 <li>
                   <a
                     href="#"
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Barbearias
+                    {isEnglish ? "Barbershops" : "Barbearias"}
                   </a>
                 </li>
                 <li>
@@ -191,30 +216,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     href="#"
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Clínicas
+                    {isEnglish ? "Clinics" : "Clínicas"}
                   </a>
                 </li>
                 <li>
                   <Link
-                    to="/custom-bot"
+                    to={`${languagePrefix}/custom-bot`}
                     onClick={handleNavLinkClick}
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Soluções personalizadas
+                    {isEnglish ? "Custom Solutions" : "Soluções personalizadas"}
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <h3 className="text-sm font-medium mb-4">Contato</h3>
+              <h3 className="text-sm font-medium mb-4">
+                {isEnglish ? "Contact" : "Contato"}
+              </h3>
               <ul className="space-y-2">
                 <li>
                   <a
                     href="#contact"
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Comece agora
+                    {isEnglish ? "Get Started" : "Comece agora"}
                   </a>
                 </li>
                 <li>
@@ -222,7 +249,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     href="mailto:info@ccm.com"
                     className="text-muted-foreground hover:text-primary text-sm"
                   >
-                    Email-nos
+                    {isEnglish ? "Email us" : "Email-nos"}
                   </a>
                 </li>
               </ul>
@@ -231,20 +258,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
           <div className="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} CCM. Todos os direitos reservados.
+              © {new Date().getFullYear()} CCM.{" "}
+              {isEnglish
+                ? "All rights reserved."
+                : "Todos os direitos reservados."}
             </p>
             <div className="flex space-x-6">
               <a
                 href="#"
                 className="text-muted-foreground hover:text-primary text-sm"
               >
-                Política de privacidade
+                {isEnglish ? "Privacy Policy" : "Política de privacidade"}
               </a>
               <a
                 href="#"
                 className="text-muted-foreground hover:text-primary text-sm"
               >
-                Termos de uso
+                {isEnglish ? "Terms of Use" : "Termos de uso"}
               </a>
             </div>
           </div>
