@@ -607,13 +607,13 @@ const CustomBot = () => {
                   htmlFor="company"
                   className="block text-sm font-medium mb-1"
                 >
-                  Nome da empresa
+                  Número de contato
                 </label>
                 <input
                   type="text"
                   id="company"
                   className="w-full px-4 py-2 bg-black border border-white/10 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
-                  placeholder="Digite o nome da sua empresa"
+                  placeholder="Digite o número de contato"
                 />
               </div>
 
