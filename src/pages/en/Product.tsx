@@ -227,18 +227,20 @@ const ProductPage = () => {
     setFormError("");
 
     try {
-      // Replace these with your EmailJS service details
       await emailjs.send(
-        "service_id",
-        "template_id",
+        "service_73hrjon",
+        "template_s55mjkv",
         {
-          from_name: formState.name,
-          from_email: formState.email,
-          phone: formState.phone,
-          business: formState.business,
-          message: formState.message,
+          name: formState.name,
+          time: new Date().toLocaleString(),
+          message: `
+Email: ${formState.email}
+Phone: ${formState.phone}
+Business: ${formState.business}
+Message: ${formState.message}
+          `,
         },
-        "user_id"
+        "shas1t9WT9WETAZdN"
       );
 
       setFormSuccess(true);

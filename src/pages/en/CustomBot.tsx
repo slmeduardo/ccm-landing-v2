@@ -227,18 +227,20 @@ const CustomBot = () => {
     setFormError("");
 
     try {
-      // Replace with your EmailJS details
       await emailjs.send(
-        "service_id",
-        "template_id",
+        "service_73hrjon",
+        "template_8ji0c3s",
         {
-          from_name: formState.name,
-          from_email: formState.email,
-          phone: formState.phone,
-          company: formState.company,
-          needs: formState.needs,
+          name: formState.name,
+          time: new Date().toLocaleString(),
+          message: `
+Email: ${formState.email}
+Phone: ${formState.phone}
+Company: ${formState.company}
+Needs: ${formState.needs}
+          `,
         },
-        "user_id"
+        "shas1t9WT9WETAZdN"
       );
 
       setFormSuccess(true);
